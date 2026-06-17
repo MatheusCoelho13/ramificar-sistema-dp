@@ -1,0 +1,23 @@
+databases:
+  - name: sistema-dp-db
+    plan: free
+    databaseName: sistema_dp
+    user: sistema_dp_user
+
+services:
+  - type: web
+    name: sistema-dp-backend
+    plan: free
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/main.js
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sistema-dp-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production

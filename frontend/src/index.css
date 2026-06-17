@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+@import "tailwindcss";
+
+:root {
+  --radius: 8px;
+  --urgent-green: #16a34a;
+  --urgent-green-bg: #dcfce7;
+  --urgent-yellow: #d97706;
+  --urgent-yellow-bg: #fef3c7;
+  --urgent-red: #dc2626;
+  --urgent-red-bg: #fee2e2;
+  --alert-laranja: #ea580c;
+  --alert-laranja-bg: #ffedd5;
+}
+
+.theme-ramificar {
+  --primary: #009739;
+  --primary-dark: #007a2e;
+  --primary-light: #e6f5ec;
+  --surface: #f4fcef;
+  --text: #0f172a;
+  font-family: 'Sora', sans-serif;
+}
+
+.theme-dp {
+  --primary: #0b5345;
+  --primary-dark: #083d33;
+  --primary-light: #e6f0ee;
+  --surface: #f1f5f9;
+  --text: #0f172a;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.material-icons-outlined {
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: middle;
+  user-select: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary, #009739);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }

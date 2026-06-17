@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  FUNCIONARIO
+  DEFENSOR
+}
+
+enum ProcessStatus {
+  NOVO
+  EM_ANDAMENTO
+  CONCLUIDO
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  openedProcesses   Process[]        @relation("OpenedBy")
+  assignedProcesses Process[]        @relation("AssignedTo")
+  messages          Message[]
+  scaleEntries      RotationScale[]
+  pulseEntries      PulseEntry[]
+  workloadReports   WorkloadReport[]
+}
+
+// Escala: data → defensor real → codinome do dia
+model RotationScale {
+  id         String   @id @default(cuid())
+  date       String   @unique // YYYY-MM-DD
+  defenderId String
+  codename   String
+  createdAt  DateTime @default(now())
+
+  defender User @relation(fields: [defenderId], references: [id])
+}
+
+model Process {
+  id                String        @id @default(cuid())
+  number            Int           @unique // populated by service via ProcessCounter
+  title             String
+  description       String
+  status            ProcessStatus @default(NOVO)
+  deadline          DateTime?
+  lastActivity      DateTime      @default(now())
+  inactivityAlerted Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  openedById   String
+  assignedToId String
+
+  openedBy   User      @relation("OpenedBy", fields: [openedById], references: [id])
+  assignedTo User      @relation("AssignedTo", fields: [assignedToId], references: [id])
+  messages   Message[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  processId String
+  senderId  String
+
+  process Process @relation(fields: [processId], references: [id])
+  sender  User    @relation(fields: [senderId], references: [id])
+}
+
+model WorkloadReport {
+  id          String   @id @default(cuid())
+  defenderId  String
+  year        Int
+  month       Int
+  total       Int      @default(0)
+  concluded   Int      @default(0)
+  alertLevel  String   // VERDE | AMARELO | LARANJA | VERMELHO
+  generatedAt DateTime @default(now())
+
+  defender User @relation(fields: [defenderId], references: [id])
+
+  @@unique([defenderId, year, month])
+}
+
+// Sequence counter for process numbers
+model ProcessCounter {
+  id    Int @id @default(1)
+  value Int @default(0)
+}
+
+model PulseEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  date      String   // YYYY-MM-DD
+  score     Int      // 1–5
+  comment   String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
