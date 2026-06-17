@@ -25,7 +25,7 @@ export function TopNavBar({ theme, title }: TopNavBarProps) {
     navigate('/login');
   }
 
-  const logoText = theme === 'Ramificar';
+  const logoText = theme === 'ramificar' ? 'Ramificar' : 'Defensoria Pública';
   const logoFont = theme === 'ramificar' ? "'Sora', sans-serif" : "'Inter', sans-serif";
   const logoBg = theme === 'ramificar' ? '#009739' : '#0b5345';
 

@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 import { SideNavBar } from './SideNavBar';
 import { TopNavBar } from './TopNavBar';
 
-type Theme = 'ramificar' ;
+type Theme = 'ramificar' | 'dp';
 
 interface AppLayoutProps {
   children: ReactNode;
