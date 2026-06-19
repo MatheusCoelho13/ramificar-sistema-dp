@@ -10,11 +10,14 @@ interface NavItem {
 
 const funcionarioItems: NavItem[] = [
   { to: '/dashboard', label: 'Painel', icon: 'home' },
+  { to: '/mensagens', label: 'Mensagens', icon: 'forum' },
+  { to: '/pulso', label: 'Pulso do Dia', icon: 'favorite' },
   { to: '/processos/novo', label: 'Nova Solicitação', icon: 'add_circle' },
 ];
 
 const defensorItems: NavItem[] = [
   { to: '/defensor', label: 'Painel', icon: 'dashboard' },
+  { to: '/defensor/mensagens', label: 'Mensagens', icon: 'forum' },
   { to: '/defensor/kanban', label: 'Kanban', icon: 'view_kanban' },
   { to: '/defensor/relatorio', label: 'Relatório de Carga', icon: 'bar_chart' },
   { to: '/defensor/pulso', label: 'Pulso do Dia', icon: 'favorite' },

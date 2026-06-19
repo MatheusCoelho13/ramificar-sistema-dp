@@ -2,10 +2,14 @@ import 'dotenv/config';
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 
 function createAdapter() {
-  const url = process.env.DATABASE_URL ?? '';
-  return new PrismaPg({ connectionString: url });
+  const pool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  });
+  return new PrismaPg(pool);
 }
 
 @Injectable()

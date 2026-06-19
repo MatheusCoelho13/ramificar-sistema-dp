@@ -12,6 +12,9 @@ import DefensorProcesso from './pages/DefensorProcesso';
 import Kanban from './pages/Kanban';
 import Relatorio from './pages/Relatorio';
 import PulsoDashboard from './pages/PulsoDashboard';
+import Mensagens from './pages/Mensagens';
+import DefensorMensagens from './pages/DefensorMensagens';
+import PulsoFuncionario from './pages/PulsoFuncionario';
 
 
 function RootRedirect() {
@@ -34,6 +37,16 @@ function App() {
                 <FuncionarioDashboard />
               </ProtectedRoute>
             } />
+            <Route path="/mensagens" element={
+              <ProtectedRoute roles={['FUNCIONARIO']}>
+                <Mensagens />
+              </ProtectedRoute>
+            } />
+            <Route path="/pulso" element={
+              <ProtectedRoute roles={['FUNCIONARIO']}>
+                <PulsoFuncionario />
+              </ProtectedRoute>
+            } />
             <Route path="/processos/novo" element={
               <ProtectedRoute roles={['FUNCIONARIO']}>
                 <NovoProcesso />
@@ -48,6 +61,11 @@ function App() {
             <Route path="/defensor" element={
               <ProtectedRoute roles={['DEFENSOR']}>
                 <DefensorDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/defensor/mensagens" element={
+              <ProtectedRoute roles={['DEFENSOR']}>
+                <DefensorMensagens />
               </ProtectedRoute>
             } />
             <Route path="/defensor/processos/:id" element={
