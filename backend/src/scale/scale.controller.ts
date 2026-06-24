@@ -8,7 +8,7 @@ import { SetScaleDto } from './dto/set-scale.dto';
 
 @Controller('scale')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.DEFENSOR)
+@Roles( Role.DEFENSOR)
 export class ScaleController {
   constructor(private scaleService: ScaleService) {}
 
@@ -17,15 +17,4 @@ export class ScaleController {
     return this.scaleService.getScale(from, to);
   }
 
-  @Post()
-  @Roles(Role.DEFENSOR)
-  setScale(@Body() dto: SetScaleDto) {
-    return this.scaleService.setScale(dto);
-  }
 
-  @Post('generate-month')
-  @Roles(Role.DEFENSOR)
-  generateMonth(@Body() body: { year: number; month: number }) {
-    return this.scaleService.generateMonthScale(body.year, body.month);
-  }
-}

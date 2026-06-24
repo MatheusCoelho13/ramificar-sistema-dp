@@ -24,7 +24,7 @@ export class PulseController {
 
   @Get('dashboard')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   getDashboard(@Query('date') date?: string) {
     return this.pulseService.getDashboard(date);
   }

@@ -30,7 +30,7 @@ export class MessagesController {
 
   @Get('defensor')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   getForDefender(@Param('processId') processId: string, @CurrentUser() user: User) {
     return this.messagesService.getForDefender(processId, user);
   }

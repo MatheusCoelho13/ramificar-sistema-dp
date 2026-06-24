@@ -32,7 +32,7 @@ export class ProcessesController {
   // Defensor lista processos atribuídos a ele
   @Get('assigned')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   findAssigned(@CurrentUser() user: User) {
     return this.processesService.findDefenderProcesses(user);
   }
@@ -40,7 +40,7 @@ export class ProcessesController {
   // Alertas de inatividade para o defensor
   @Get('alerts')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   getAlerts(@CurrentUser() user: User) {
     return this.processesService.getAlertedProcesses(user);
   }
@@ -56,7 +56,7 @@ export class ProcessesController {
   // Detalhe para defensor (com nome do funcionário)
   @Get(':id/defensor')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   findOneForDefender(@Param('id') id: string, @CurrentUser() user: User) {
     return this.processesService.findOneForDefender(id, user);
   }
@@ -64,7 +64,7 @@ export class ProcessesController {
   // Defensor atualiza status e prazo
   @Patch(':id')
   @UseGuards(RolesGuard)
-  @Roles(Role.DEFENSOR)
+  @Roles(Role.DEFENSOR,)
   update(@Param('id') id: string, @Body() dto: UpdateProcessDto, @CurrentUser() user: User) {
     return this.processesService.update(id, dto, user);
   }
