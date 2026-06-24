@@ -16,5 +16,5 @@ export class ScaleController {
   getScale(@Query('from') from: string, @Query('to') to: string) {
     return this.scaleService.getScale(from, to);
   }
-}
+
 
